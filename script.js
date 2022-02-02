@@ -20,7 +20,11 @@ function createProductItemElement({ sku, name, image }) {
 
   section.appendChild(createCustomElement('span', 'item__sku', sku));
   section.appendChild(createCustomElement('span', 'item__title', name));
-  section.appendChild(createProductImageElement(image));
+  const newImage = image.split('-'); // o split separa minha string em um grupo de arrays pelo parametro que eu passar
+  if (newImage[2].includes('I')) newImage[2] = 'J.jpg';
+  const bestImage = `${newImage[0]}-${newImage[1]}-${newImage[2]}`;
+  console.log(bestImage);
+  section.appendChild(createProductImageElement(bestImage));
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
 
   return section;
@@ -41,6 +45,8 @@ function createCartItemElement({ sku, name, salePrice }) {
   li.addEventListener('click', cartItemClickListener);
   return li;
 }
+
+fetchProducts('computador').then(console.log);
 
 const sectionItem = () => {
   const obj = {};
