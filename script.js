@@ -14,6 +14,18 @@ function createCustomElement(element, className, innerText) {
   return e;
 }
 
+const pegaId = (event) => {
+  const obj2 = {};
+  const ev = event.target.parentElement.firstChild.innerText;
+  fetchItem(ev).then(({ id, title, price }) => {
+    obj2.id = id;
+    obj2.title = title;
+    obj2.price = price;
+  });
+  console.log(obj2);
+  return obj2;
+};
+
 function createProductItemElement({ sku, name, image }) {
   const section = document.createElement('section');
   section.className = 'item';
@@ -23,9 +35,10 @@ function createProductItemElement({ sku, name, image }) {
   const newImage = image.split('-'); // o split separa minha string em um grupo de arrays pelo parametro que eu passar
   if (newImage[2].includes('I')) newImage[2] = 'J.jpg';
   const bestImage = `${newImage[0]}-${newImage[1]}-${newImage[2]}`;
-  console.log(bestImage);
   section.appendChild(createProductImageElement(bestImage));
-  section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
+  const btnAdd = createCustomElement('button', 'item__add', 'Adicionar ao carrinho!');
+  btnAdd.addEventListener('click', pegaId);
+  section.appendChild(btnAdd);
 
   return section;
 }
