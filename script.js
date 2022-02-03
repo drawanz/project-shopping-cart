@@ -46,15 +46,14 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-fetchProducts('computador').then(console.log);
-
 const sectionItem = () => {
   const obj = {};
-  fetchProducts('computador').then((results) => results.forEach(({ id, title, thumbnail }) => {
-      obj.sku = id;
-      obj.name = title;
-      obj.image = thumbnail;
-      sectionItems.appendChild(createProductItemElement(obj));
+  fetchProducts('computador').then((objeto) => 
+    objeto.results.forEach(({ id, title, thumbnail }) => {
+        obj.sku = id;
+        obj.name = title;
+        obj.image = thumbnail;
+        sectionItems.appendChild(createProductItemElement(obj));
     }));
 };
 window.onload = () => {

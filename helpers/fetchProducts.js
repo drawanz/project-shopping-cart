@@ -1,10 +1,14 @@
 const fetchProducts = async (item) => {
-  // seu código aqui
-  const url = `https://api.mercadolibre.com/sites/MLB/search?q=$${item}`;
-  const response = await fetch(url);
-  const { results } = await response.json();
-  // console.log(obj);
-  return results;
+  try {
+    if (item.length > 0) {
+      const url = `https://api.mercadolibre.com/sites/MLB/search?q=${item}`;
+      const response = await fetch(url);
+      const objeto = await response.json();
+      return objeto;
+    }
+  } catch (error) {
+    throw new Error('You must provide an url.');
+  }
 };
 
 if (typeof module !== 'undefined') {
