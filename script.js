@@ -16,6 +16,7 @@ function createCustomElement(element, className, innerText) {
 
 function cartItemClickListener(event) {
   event.target.remove();
+  saveCartItems();
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -32,6 +33,7 @@ const pegaId = (event) => {
   const ev = event.target.parentElement.firstChild.innerText;
   fetchItem(ev).then(({ id, title, price }) => {
     createCartItemElement({ sku: id, name: title, salePrice: price });
+    saveCartItems();
   });
 };
 
@@ -64,6 +66,15 @@ const sectionItem = () => {
     }));
 };
 
+function addEventListerSavedItems() {
+  const li = document.getElementsByClassName('cart__item');
+  for (let i = 0; i < li.length; i += 1) {
+    li[i].addEventListener('click', cartItemClickListener);
+  }
+}
+
 window.onload = () => {
   sectionItem();
+  getSavedCartItems();
+  addEventListerSavedItems();
  };
