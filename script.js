@@ -57,13 +57,13 @@ function getSkuFromProductItem(item) {
 }
 
 const sectionItem = () => {
-  const obj = {};
   fetchProducts('computador').then((objeto) => 
     objeto.results.forEach(({ id, title, thumbnail }) => {
         sectionItems
           .appendChild(createProductItemElement({ sku: id, name: title, image: thumbnail }));
     }));
 };
+
 window.onload = () => {
   sectionItem();
  };

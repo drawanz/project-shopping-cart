@@ -8,7 +8,7 @@ const fetchItem = async (item) => {
   return obj;
     }
   } catch (error) {
-    throw new Error('You must provide an url');
+    throw new Error('You must provide an url.');
   }
 };
 
