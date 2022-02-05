@@ -1,11 +1,9 @@
 const saveCartItems = (item) => {
-  if (item === undefined) {
-    const ol = document.querySelector('.cart__items');
-    const olHtml = ol.innerHTML;
-    localStorage.setItem('cartItems', olHtml);
-  } else {
+  const ol = document.getElementsByTagName('ol');
+  if (item) {
     localStorage.setItem('cartItems', item);
   }
+    localStorage.setItem('cartItems', ol.innerHTML);
 };
 
 if (typeof module !== 'undefined') {
