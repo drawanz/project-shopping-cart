@@ -74,8 +74,19 @@ function addEventListerSavedItems() {
   }
 }
 
+function getPriceCartItem() {
+  const firstItem = document.querySelector('ol').children;
+  let total = 0;
+  for (let i = 0; i < firstItem.length; i += 1) {
+    const text = firstItem[i].innerText.split('$')[1];
+    total += parseInt(text, 10);
+  }
+  return total;
+}
+
 window.onload = () => {
   sectionItem();
   getSavedCartItems();
   addEventListerSavedItems();
+  getPriceCartItem();
  };
