@@ -1,4 +1,5 @@
 const sectionItems = document.querySelector('.items');
+const ol = document.querySelector('.cart__items');
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -16,12 +17,12 @@ function createCustomElement(element, className, innerText) {
 
 function cartItemClickListener(event) {
   event.target.remove();
-  saveCartItems();
+  saveCartItems(ol.innerHTML);
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
   const li = document.createElement('li');
-  const ol = document.querySelector('.cart__items');
+
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
@@ -33,7 +34,7 @@ const pegaId = (event) => {
   const ev = event.target.parentElement.firstChild.innerText;
   fetchItem(ev).then(({ id, title, price }) => {
     createCartItemElement({ sku: id, name: title, salePrice: price });
-    saveCartItems();
+    saveCartItems(ol.innerHTML);
   });
 };
 
