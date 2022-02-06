@@ -1,12 +1,14 @@
 const sectionItems = document.querySelector('.items');
 const ol = document.querySelector('.cart__items');
+const emptyCart = document.querySelector('.empty-cart');
 
 function getPriceCartItem() {
   const firstItem = document.querySelector('ol').children;
+  console.log(firstItem);
   let total = 0;
   for (let i = 0; i < firstItem.length; i += 1) {
     const text = firstItem[i].innerText.split('$')[1];
-    total += parseFloat(text, 10);
+    total += parseFloat(text);
   }
   return total;
 }
@@ -73,6 +75,12 @@ function createProductItemElement({ sku, name, image }) {
   return section;
 }
 
+function emptyingCart() {
+  ol.innerHTML = '';
+  subTotalCartItems();
+  saveCartItems('');
+}
+
 // function getSkuFromProductItem(item) {
 //   return item.querySelector('span.item__sku').innerText;
 // }
@@ -91,6 +99,8 @@ function addEventListerSavedItems() {
     li[i].addEventListener('click', cartItemClickListener);
   }
 }
+
+emptyCart.addEventListener('click', emptyingCart);
 
 window.onload = () => {
   sectionItem();
