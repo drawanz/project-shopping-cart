@@ -10,7 +10,7 @@ function getPriceCartItem() {
     const text = firstItem[i].innerText.split('$')[1];
     total += parseFloat(text);
   }
-  return total;
+  return total; // toFixed faz aparecer apenas 2 casas após a vírgula
 }
 
 function subTotalCartItems() {
@@ -85,12 +85,32 @@ function emptyingCart() {
 //   return item.querySelector('span.item__sku').innerText;
 // }
 
-const sectionItem = () => {
-  fetchProducts('computador').then((objeto) => 
+function createLoadMessage() {
+  const text = document.createElement('p');
+  const trybeShopping = document.querySelector('.container-title');
+  text.innerText = 'carregando...';
+  text.style.fontSize = '200%';
+  text.style.color = 'yellow';
+  text.className = ('loading');
+  const header = document.querySelector('.header');
+  header.insertBefore(text, trybeShopping.nextSibling);
+  console.log('passei aqui');
+}
+
+function removeLoadMessage() {
+  const header = document.querySelector('.header');
+  const text = document.querySelector('.loading');
+  header.removeChild(text);
+}
+
+const sectionItem = async () => { // levar para monitoria
+  createLoadMessage();
+  await fetchProducts('computador').then((objeto) => 
     objeto.results.forEach(({ id, title, thumbnail }) => {
         sectionItems
           .appendChild(createProductItemElement({ sku: id, name: title, image: thumbnail }));
     }));
+  removeLoadMessage();    
 };
 
 function addEventListerSavedItems() {
