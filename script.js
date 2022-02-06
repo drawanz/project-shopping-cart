@@ -1,6 +1,22 @@
 const sectionItems = document.querySelector('.items');
 const ol = document.querySelector('.cart__items');
 
+function getPriceCartItem() {
+  const firstItem = document.querySelector('ol').children;
+  let total = 0;
+  for (let i = 0; i < firstItem.length; i += 1) {
+    const text = firstItem[i].innerText.split('$')[1];
+    total += parseFloat(text, 10);
+  }
+  return total;
+}
+
+function subTotalCartItems() {
+  const subTotal = document.querySelector('#subtotal');
+  const valueCartItems = getPriceCartItem();
+  subTotal.innerHTML = `${valueCartItems}`;
+}
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -18,6 +34,7 @@ function createCustomElement(element, className, innerText) {
 function cartItemClickListener(event) {
   event.target.remove();
   saveCartItems(ol.innerHTML);
+  subTotalCartItems();
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -35,6 +52,7 @@ const pegaId = (event) => {
   fetchItem(ev).then(({ id, title, price }) => {
     createCartItemElement({ sku: id, name: title, salePrice: price });
     saveCartItems(ol.innerHTML);
+    subTotalCartItems();
   });
 };
 
@@ -55,9 +73,9 @@ function createProductItemElement({ sku, name, image }) {
   return section;
 }
 
-function getSkuFromProductItem(item) {
-  return item.querySelector('span.item__sku').innerText;
-}
+// function getSkuFromProductItem(item) {
+//   return item.querySelector('span.item__sku').innerText;
+// }
 
 const sectionItem = () => {
   fetchProducts('computador').then((objeto) => 
@@ -74,19 +92,9 @@ function addEventListerSavedItems() {
   }
 }
 
-function getPriceCartItem() {
-  const firstItem = document.querySelector('ol').children;
-  let total = 0;
-  for (let i = 0; i < firstItem.length; i += 1) {
-    const text = firstItem[i].innerText.split('$')[1];
-    total += parseInt(text, 10);
-  }
-  return total;
-}
-
 window.onload = () => {
   sectionItem();
   getSavedCartItems();
   addEventListerSavedItems();
-  getPriceCartItem();
+  subTotalCartItems();
  };
