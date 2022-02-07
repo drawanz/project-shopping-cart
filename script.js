@@ -4,7 +4,6 @@ const emptyCart = document.querySelector('.empty-cart');
 
 function getPriceCartItem() {
   const firstItem = document.querySelector('ol').children;
-  console.log(firstItem);
   let total = 0;
   for (let i = 0; i < firstItem.length; i += 1) {
     const text = firstItem[i].innerText.split('$')[1];
@@ -94,7 +93,6 @@ function createLoadMessage() {
   text.className = ('loading');
   const header = document.querySelector('.header');
   header.insertBefore(text, trybeShopping.nextSibling);
-  console.log('passei aqui');
 }
 
 function removeLoadMessage() {
@@ -103,13 +101,12 @@ function removeLoadMessage() {
   header.removeChild(text);
 }
 
-const sectionItem = async () => { // levar para monitoria
-  createLoadMessage();
-  await fetchProducts('computador').then((objeto) => 
-    objeto.results.forEach(({ id, title, thumbnail }) => {
-        sectionItems
-          .appendChild(createProductItemElement({ sku: id, name: title, image: thumbnail }));
-    }));
+const sectionItem = async () => {
+  const { results } = await fetchProducts('computador');
+  results.forEach(({ id, title, thumbnail }) => {
+    sectionItems
+      .appendChild(createProductItemElement({ sku: id, name: title, image: thumbnail }));
+  });
   removeLoadMessage();    
 };
 
@@ -123,6 +120,7 @@ function addEventListerSavedItems() {
 emptyCart.addEventListener('click', emptyingCart);
 
 window.onload = () => {
+  createLoadMessage();
   sectionItem();
   getSavedCartItems();
   addEventListerSavedItems();
