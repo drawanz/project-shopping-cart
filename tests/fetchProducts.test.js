@@ -1,6 +1,6 @@
-require('../mocks/fetchSimulator');
-const { fetchProducts } = require('../helpers/fetchProducts');
-const computadorSearch = require('../mocks/search');
+require('../mocks/fetchSimulator'); // linha de código fornecida pela escola Trybe
+const { fetchProducts } = require('../helpers/fetchProducts'); // linha de código fornecida pela escola Trybe
+const computadorSearch = require('../mocks/search'); // linha de código fornecida pela escola Trybe
 
 describe('1 - Teste a função fecthProducts', () => {
   // implemente seus testes aqui

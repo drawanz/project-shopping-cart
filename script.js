@@ -9,7 +9,7 @@ function getPriceCartItem() {
     const text = firstItem[i].innerText.split('$')[1];
     total += parseFloat(text);
   }
-  return total; // toFixed faz aparecer apenas 2 casas após a vírgula
+  return total;
 }
 
 function subTotalCartItems() {
@@ -18,11 +18,11 @@ function subTotalCartItems() {
   subTotal.innerHTML = `${valueCartItems}`;
 }
 
-function createProductImageElement(imageSource) {
-  const img = document.createElement('img');
-  img.className = 'item__image';
-  img.src = imageSource;
-  return img;
+function createProductImageElement(imageSource) { // linha de código fornecida pela escola Trybe
+  const img = document.createElement('img'); // linha de código fornecida pela escola Trybe
+  img.className = 'item__image'; // linha de código fornecida pela escola Trybe
+  img.src = imageSource; // linha de código fornecida pela escola Trybe
+  return img; // linha de código fornecida pela escola Trybe
 }
 
 function createCustomElement(element, className, innerText) {
@@ -32,19 +32,19 @@ function createCustomElement(element, className, innerText) {
   return e;
 }
 
-function cartItemClickListener(event) {
-  event.target.remove();
+function cartItemClickListener(event) { // linha de código fornecida pela escola Trybe
+  event.target.remove(); 
   saveCartItems(ol.innerHTML);
   subTotalCartItems();
 }
 
-function createCartItemElement({ sku, name, salePrice }) {
-  const li = document.createElement('li');
+function createCartItemElement({ sku, name, salePrice }) { // linha de código fornecida pela escola Trybe
+  const li = document.createElement('li'); // linha de código fornecida pela escola Trybe
 
-  li.className = 'cart__item';
-  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
-  li.addEventListener('click', cartItemClickListener);
-  ol.appendChild(li);
+  li.className = 'cart__item'; // linha de código fornecida pela escola Trybe
+  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`; // linha de código fornecida pela escola Trybe
+  li.addEventListener('click', cartItemClickListener); // linha de código fornecida pela escola Trybe
+  ol.appendChild(li); // linha de código fornecida pela escola Trybe
   return li;
 }
 
@@ -57,21 +57,21 @@ const pegaId = (event) => {
   });
 };
 
-function createProductItemElement({ sku, name, image }) {
-  const section = document.createElement('section');
-  section.className = 'item';
+function createProductItemElement({ sku, name, image }) { // linha de código fornecida pela escola Trybe
+  const section = document.createElement('section'); // linha de código fornecida pela escola Trybe
+  section.className = 'item'; // linha de código fornecida pela escola Trybe
 
-  section.appendChild(createCustomElement('span', 'item__sku', sku));
-  section.appendChild(createCustomElement('span', 'item__title', name));
+  section.appendChild(createCustomElement('span', 'item__sku', sku)); // linha de código fornecida pela escola Trybe
+  section.appendChild(createCustomElement('span', 'item__title', name)); // linha de código fornecida pela escola Trybe
   const newImage = image.split('-'); // o split separa minha string em um grupo de arrays pelo parametro que eu passar
-  if (newImage[2].includes('I')) newImage[2] = 'J.jpg';
+  if (newImage[2].includes('I')) newImage[2] = 'J.jpg'; 
   const bestImage = `${newImage[0]}-${newImage[1]}-${newImage[2]}`;
-  section.appendChild(createProductImageElement(bestImage));
+  section.appendChild(createProductImageElement(bestImage)); 
   const btnAdd = createCustomElement('button', 'item__add', 'Adicionar ao carrinho!');
   btnAdd.addEventListener('click', pegaId);
   section.appendChild(btnAdd);
 
-  return section;
+  return section; // linha de código fornecida pela escola Trybe
 }
 
 function emptyingCart() {
@@ -79,10 +79,6 @@ function emptyingCart() {
   subTotalCartItems();
   saveCartItems('');
 }
-
-// function getSkuFromProductItem(item) {
-//   return item.querySelector('span.item__sku').innerText;
-// }
 
 function createLoadMessage() {
   const text = document.createElement('p');
